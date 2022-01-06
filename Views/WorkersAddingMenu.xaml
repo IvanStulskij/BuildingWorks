@@ -1,0 +1,139 @@
+﻿<Window x:Class="BuildingWorks.Views.WorkersAddingMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuildingWorks.Views"
+        xmlns:vm="clr-namespace:BuildingWorks.ViewModels"
+        xmlns:converters="clr-namespace:BuildingWorks.Models.Converters"
+        mc:Ignorable="d"
+        Title="Добавление работника" Height="424" Width="549">
+    <Window.DataContext>
+        <vm:WorkersViewModel></vm:WorkersViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:WorkerConverter x:Key="WorkerConverter"></converters:WorkerConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TextBox 
+            Name = "WorkerName"
+            HorizontalAlignment="Left"
+            Margin="235,6,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <TextBox
+            Name="BaseSalary"
+            HorizontalAlignment="Left"
+            Margin="292,39,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <TextBox
+            Name="Experience"
+            HorizontalAlignment="Left"
+            Margin="292,79,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <TextBox
+            Name="ChildrenCount"
+            HorizontalAlignment="Left"
+            Margin="290,116,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <TextBox
+            Name = "WorkedDays"
+            HorizontalAlignment="Left"
+            Margin="290,149,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <ComboBox
+            ItemsSource="{Binding WorkersTypes}"
+            Name="WorkerPost"
+            HorizontalAlignment="Left"
+            Margin="235,213,0,0"
+            VerticalAlignment="Top"
+            Width="120"/>
+        <ComboBox
+            Name="Brigade"
+            HorizontalAlignment="Left"
+            Margin="235,254,0,0"
+            VerticalAlignment="Top" 
+            Width="120"/>
+        <DatePicker
+            Name="StartWorkingDate"
+            HorizontalAlignment="Left"
+            Margin="235,294,0,0"
+            VerticalAlignment="Top"
+            Width="120"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="79,8,0,0" 
+            Text="ФИО" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="136,49,0,0" 
+            Text="Оклад" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="136,89,0,0" 
+            Text="Опыт работы" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="134,126,0,0" 
+            Text="Кол-во детей" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="134,151,0,0" 
+            Text="Кол-во отработанных дней" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="79,219,0,0" 
+            Text="Должность" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="79,260,0,0" 
+            Text="Бригада" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <TextBlock 
+            HorizontalAlignment="Left"
+            Margin="79,298,0,0" 
+            Text="Дата начала работы" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"/>
+        <Button
+            Command="{Binding AddCommand}"
+            x:Name="NewWorkerAddingButton"
+            Content="Добавить"
+            HorizontalAlignment="Left"
+            Margin="445,164,0,0"
+            VerticalAlignment="Top">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource WorkerConverter}">
+                    <Binding Path="Text" ElementName="WorkerName"></Binding>
+                    <Binding Path="SelectedValue" ElementName="WorkerPost"></Binding>
+                    <Binding Path="SelectedValue" ElementName="Brigade"></Binding>
+                    <Binding Path="SelectedDate" ElementName="StartWorkingDate"></Binding>
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+    </Grid>
+</Window>

@@ -1,0 +1,463 @@
+﻿<Window x:Class="BuildingWorks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:BuildingWorks.ViewModels"
+        xmlns:selectionConverter ="clr-namespace:BuildingWorks.Models.Converters"
+        xmlns:local="clr-namespace:BuildingWorks"
+        mc:Ignorable="d"
+        Title="Строительные работы" Height="449" Width="800" Activated="Window_Activated">
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <selectionConverter:SearchConverter x:Key="SearchConverter"></selectionConverter:SearchConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid x:Name="Header">
+            <TabControl>
+                <TabItem Name="WorkersItem" Header="Работники">
+                    <Grid Name="MainWorkers" Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="207*"/>
+                            <ColumnDefinition Width="305*"/>
+                            <ColumnDefinition Width="282*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Name="SearchPanelWorkers" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="101*"/>
+                                <ColumnDefinition Width="296*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button
+                                Command="{Binding WorkersViewModel.FindByConditionCommand}"
+                                Name="SearchWorker"
+                                Content="Искать" 
+                                HorizontalAlignment="Left"
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top" Height="24">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource SearchConverter }">
+                                        <Binding Path="SelectedValue" ElementName="WorkersProperties"/>
+                                        <Binding Path="Text" ElementName="WorkersSearchText"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
+                            <TextBox Name="WorkersSearchText"
+                                     HorizontalAlignment="Left"
+                                     Margin="67,12,0,0"
+                                     TextWrapping="Wrap"
+                                     VerticalAlignment="Top"
+                                     Width="120" 
+                                     Height="22"/>
+                            <ComboBox
+                                Name="WorkersProperties"
+                                ItemsSource="{Binding WorkersViewModel.PropertiesNames}"
+                                HorizontalAlignment="Left"
+                                Margin="75,12,0,0" 
+                                VerticalAlignment="Top" 
+                                Width="120" Grid.Column="1"/>
+                        </Grid>
+                        <Grid Name="WorkersPanel" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="202*"/>
+                                <ColumnDefinition Width="60*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="85*"/>
+                                <ColumnDefinition Width="432*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid
+                                ItemsSource="{Binding WorkersViewModel.DataToSelect}"
+                                IsReadOnly="True" 
+                                Name="Workers"
+                                Margin="10,59,237,102"
+                                Grid.ColumnSpan="5">
+
+                            </DataGrid>
+                        </Grid>
+                        <Grid Name="AddingPanel" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="197*"/>
+                                <ColumnDefinition Width="597*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button
+                                Content="Добавить"
+                                HorizontalAlignment="Left"
+                                Margin="439,59,0,0"
+                                VerticalAlignment="Top" Width="61" Grid.Column="1"/>
+                            <Button
+                                Content="Обновить"
+                                HorizontalAlignment="Left"
+                                Margin="439,84,0,0"
+                                VerticalAlignment="Top" Width="61" Grid.Column="1"/>
+                            <Button
+                                Content="Удалить"
+                                HorizontalAlignment="Left"
+                                Margin="439,109,0,0"
+                                VerticalAlignment="Top" Width="61" Grid.Column="1"/>
+                            <Button
+                                Content="Инфо о зарплате"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                Margin="439,134,0,0"
+                                VerticalAlignment="Top"
+                                Width="101">
+                            </Button>
+                        </Grid>
+                        <Grid x:Name="SalaryCountPanel" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="117*"/>
+                                <ColumnDefinition Width="677*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Стройобъекты">
+                    <Grid x:Name="MainBuildingObjects" Background="#FFE5E5E5">
+                        <Grid x:Name="SearchPanelBuildingObjects">
+                            <Button
+                            Command="{Binding BuildingObjectViewModel.FindByConditionCommand}"
+                            Name="SearhBuildingObjects"
+                            Content="Искать" 
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource SearchConverter }">
+                                        <Binding Path="SelectedValue" ElementName="BuildingObjectsProperties"/>
+                                        <Binding Path="Text" ElementName="ValueToCompareBuildingObject"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
+                            <TextBox 
+                            Name="ValueToCompareBuildingObject"
+                            HorizontalAlignment="Left"
+                            Margin="72,10,0,0"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Top"
+                            Width="120"
+                            Height="20"/>
+                            <ComboBox 
+                            Name="BuildingObjectsProperties"
+                            ItemsSource="{Binding BuildingObjectViewModel.PropertiesNames}"
+                            HorizontalAlignment="Left"
+                            Margin="227,10,0,0"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+                        </Grid>
+                        <Grid x:Name="BuildingObjectsPanel" Margin="0,44,282,0">
+                            <DataGrid 
+                                ItemsSource="{Binding BuildingObjectViewModel.DataToSelect}"
+                                IsReadOnly="True" 
+                                x:Name="BuildingObjects"
+                                Margin="10,10,-45,101">
+
+                            </DataGrid>
+                        </Grid>
+                        <Grid x:Name="BuildObjectAddPanel">
+                            <Button 
+                                Content="Добавить " 
+                                HorizontalAlignment="Left"
+                                Margin="627,54,0,0"
+                                VerticalAlignment="Top" Width="58"/>
+                            <Button 
+                                Content="Обновить"
+                                HorizontalAlignment="Left" 
+                                Margin="627,89,0,0" 
+                                VerticalAlignment="Top"/>
+                            <Button 
+                                Content="Удалить"
+                                HorizontalAlignment="Left" 
+                                Margin="577,124,0,0" 
+                                VerticalAlignment="Top" Width="130"/>
+                        </Grid>
+                        <Button
+                            Content="Расчитать прибыль" 
+                            HorizontalAlignment="Left"
+                            Margin="10,324,0,0"
+                            VerticalAlignment="Top" Width="118"/>
+                        <TextBlock
+                            HorizontalAlignment="Left"
+                            Margin="138,328,0,0" 
+                            Text="Прибыль" 
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Top"/>
+                        <Button 
+                            Content="Расчитать стоимость" 
+                            HorizontalAlignment="Left"
+                            Margin="10,349,0,0"
+                            VerticalAlignment="Top"/>
+                        <TextBlock 
+                            HorizontalAlignment="Left"
+                            Margin="138,351,0,0" 
+                            Text="Стоимость"
+                            TextWrapping="Wrap" 
+                            VerticalAlignment="Top"/>
+                        <Button
+                            Content="Распределить по типам"
+                            HorizontalAlignment="Center"
+                            Margin="0,328,0,0"
+                            VerticalAlignment="Top"
+                            Width="160"/>
+                        <Button
+                            Command="{Binding ProvidersViewModel.MaterialsCostViewModel.CountMaterialsCostByObject}"
+                            Content="Стоимость материалов" 
+                            HorizontalAlignment="Left"
+                            Margin="577,159,0,0"
+                            VerticalAlignment="Top">
+                            <Button.CommandParameter>
+                                5
+                            </Button.CommandParameter>
+                        </Button>
+                        <Button
+                            Command="{Binding WorkersViewModel.SalariesViewModel.CountWorkersSalariesByObject}"
+                            Content="Траты на ЗП"
+                            HorizontalAlignment="Left"
+                            Margin="577,0,0,0"
+                            VerticalAlignment="Center"
+                            Width="131">
+                            <Button.CommandParameter>
+                                5
+                            </Button.CommandParameter>
+                        </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Поставщики">
+                    <Grid Background="#FFE5E5E5" Name="ProvidersMain">
+                        <Grid Name="SearchPanelProviders">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="381*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button
+                                Name="SearchButtonProivders"
+                                Content="Искать" 
+                                HorizontalAlignment="Left"
+                                Margin="10,10,0,0"
+                                VerticalAlignment="Top" 
+                                Height="24" 
+                                Grid.ColumnSpan="2"
+                                Command="{Binding ProvidersViewModel.SelectProviders}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource SearchConverter}">
+                                        <Binding Path="SelectedValue" ElementName="SearchProviderParams"/>
+                                        <Binding Path="Text" ElementName="SearchProviderText"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
+                            <TextBox
+                                Name="SearchProviderText"
+                                HorizontalAlignment="Right"
+                                Margin="0,12,607,0"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Top"
+                                Width="120" 
+                                Height="22" Grid.Column="1"/>
+                            <ComboBox
+                                ItemsSource="{Binding ProvidersViewModel.PropertiesNames}"
+                                Name="SearchProviderParams"
+                                HorizontalAlignment="Left"
+                                Margin="245,12,0,0" 
+                                VerticalAlignment="Top" 
+                                Width="120" Grid.Column="1" SelectionChanged="SearchProviderParams_SelectionChanged"/>
+                        </Grid>
+                        <Grid Name="ProvidersPanel">
+                            <DataGrid
+                                ItemsSource="{Binding ProvidersViewModel.DataToSelect}"
+                                IsReadOnly="True"
+                                Name="Providers"
+                                Margin="10,59,237,102">
+                            </DataGrid>
+                        </Grid>
+                        <Grid x:Name="ProvidersAddPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="37*"/>
+                                <ColumnDefinition Width="757*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button 
+                                Content="Добавить" 
+                                HorizontalAlignment="Left"
+                                Margin="590,54,0,0"
+                                VerticalAlignment="Top" Width="130" Grid.Column="1"/>
+                            <Button 
+                                Content="Обновить"
+                                HorizontalAlignment="Left" 
+                                Margin="590,89,0,0" 
+                                VerticalAlignment="Top" Grid.Column="1" Width="130"/>
+                            <Button 
+                                Command="{Binding BuildingObjectViewModel.RemoveCommand}"
+                                Content="Удалить"
+                                HorizontalAlignment="Left" 
+                                Margin="590,124,0,0" 
+                                VerticalAlignment="Top" Grid.Column="1" Width="130">
+                                <Button.CommandParameter>
+                                    5
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button
+                                Command="{Binding ProvidersViewModel.ProviderStatesViewModel.SelectContractsCommad}"
+                                Content="Просмотр договоров" 
+                                Grid.Column="1" 
+                                HorizontalAlignment="Left"
+                                Margin="590,159,0,0"
+                                VerticalAlignment="Top" 
+                                Width="130">
+                                <Button.CommandParameter>
+                                    1
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button 
+                                Command="{Binding ProvidersViewModel.ProviderStatesViewModel.SelectAllProvidersCommand}"
+                                Content="Поставщики"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                Margin="590,229,0,0"
+                                VerticalAlignment="Top"
+                                Width="130"/>
+                            <Button
+                                Command ="{Binding ProvidersViewModel.ProviderStatesViewModel.SelectMaterialsCommad}"
+                                Content="Поставляемые материалы"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                Margin="590,0,0,0"
+                                VerticalAlignment="Center"
+                                Width="130">
+                                <Button.CommandParameter>
+                                    2
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Планы">
+                    <Grid x:Name="MainPlans" Background="#FFE5E5E5" Height="409">
+                        <Grid x:Name="PlansSearchPanel">
+                            <Button
+                            Command="{Binding PlansViewModel.FindPlansByCondition}"
+                            Name="SearhPlan"
+                            Content="Искать" 
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource SearchConverter}">
+                                        <Binding Path="SelectedValue" ElementName="PropertiesNamesPlans"></Binding>
+                                        <Binding Path="Text" ElementName="ValueToSelectPlans"></Binding>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
+                            <TextBox
+                            Name="ValueToSelectPlans"
+                            HorizontalAlignment="Left"
+                            Margin="67,10,0,0"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Top"
+                            Width="120"
+                            Height="20"/>
+                            <ComboBox
+                            Name="PropertiesNamesPlans"
+                            ItemsSource="{Binding PlansViewModel.PropertiesNames}"
+                            HorizontalAlignment="Left"
+                            Margin="227,10,0,0"
+                            VerticalAlignment="Top"
+                            Width="120"/>
+                        </Grid>
+                        <Grid Name="PlansPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="142*"/>
+                                <ColumnDefinition Width="75*"/>
+                                <ColumnDefinition Width="577*"/>
+                            </Grid.ColumnDefinitions>
+                            <DataGrid
+                                ItemsSource="{Binding PlansViewModel.DataToSelect}"
+                                IsReadOnly="True"
+                                Name="Plans"
+                                Margin="10,59,237,102"
+                                Grid.ColumnSpan="3">
+
+                            </DataGrid>
+                        </Grid>
+                        <Grid x:Name="PlansAddPanel">
+                            <Button 
+                                Content="Добавить" 
+                                HorizontalAlignment="Left"
+                                Margin="627,54,0,0"
+                                VerticalAlignment="Top" Width="85"/>
+                            <Button 
+                                Content="Обновить"
+                                HorizontalAlignment="Left" 
+                                Margin="627,89,0,0" 
+                                VerticalAlignment="Top" Width="85"/>
+                        </Grid>
+                        <Grid x:Name="PlansDetaalizationPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="106*"/>
+                                <ColumnDefinition Width="291*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button 
+                                Content="Детали плана"
+                                HorizontalAlignment="Left"
+                                Margin="415,119,0,0"
+                                VerticalAlignment="Top" Grid.Column="1" Width="86"/>
+                            <Button 
+                                Content="Изображение" 
+                                HorizontalAlignment="Left" 
+                                Margin="415,154,0,0" 
+                                VerticalAlignment="Top" Grid.Column="1" Width="86"/>
+                        </Grid>
+                        <Grid Name="BenefitPanel">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="367*"/>
+                                <ColumnDefinition Width="427*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button 
+                                Command="{Binding PlansViewModel.PlansDetailsViewModel.CountDonePercentCommand}"
+                                Content="Расчет процента выполнения"
+                                HorizontalAlignment="Left"
+                                Margin="258,324,0,0"
+                                VerticalAlignment="Top" Grid.ColumnSpan="2" Width="179">
+                                <Button.CommandParameter>
+                                    1
+                                </Button.CommandParameter>
+                            </Button>
+                            <TextBlock 
+                                Name = "DoneOutput"
+                                HorizontalAlignment="Left" 
+                                Margin="89,328,0,0"
+                                Text="{Binding PlansViewModel.PlansDetailsViewModel.DonePercent}" 
+                                TextWrapping="Wrap" 
+                                VerticalAlignment="Top" Width="46" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Архив аналитики">
+                    <Grid x:Name="MainAnaliticsArchive" Background="#FFE5E5E5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="267*"/>
+                            <ColumnDefinition Width="527*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Name="AnaiticsArchivePanel" Grid.ColumnSpan="2">
+                            <DataGrid IsReadOnly="True" Name="AnaliticsArchive" Margin="10,59,237,102">
+
+                            </DataGrid>
+                        </Grid>
+                        <Grid Name="PlanSearchPanel" Grid.ColumnSpan="2">
+                            <DatePicker
+                                HorizontalAlignment="Left" 
+                                Margin="287,14,0,0"
+                                VerticalAlignment="Top"/>
+                            <TextBlock
+                                HorizontalAlignment="Left"
+                                Margin="58,18,0,0" 
+                                Text="Выберите дату для просмотра записи" 
+                                TextWrapping="Wrap" 
+                                VerticalAlignment="Top"/>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>

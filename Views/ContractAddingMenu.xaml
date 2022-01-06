@@ -1,0 +1,27 @@
+﻿<Window x:Class="BuildingWorks.Views.ContractAddingMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuildingWorks.Views"
+        xmlns:vm="clr-namespace:BuildingWorks.ViewModels"
+        mc:Ignorable="d"
+        Title="ContractAddingMenu" Height="450" Width="399">
+    <Window.DataContext>
+        <vm:ProvidersViewModel></vm:ProvidersViewModel>
+    </Window.DataContext>
+    <Grid>
+        <ComboBox
+            HorizontalAlignment="Left"
+            Margin="200,29,0,0"
+            VerticalAlignment="Top"
+            Width="120"/>
+        <RichTextBox x:Name="Conditions" Margin="200,56,10,278">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </Grid>
+</Window>
