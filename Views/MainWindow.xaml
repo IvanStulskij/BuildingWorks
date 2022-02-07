@@ -32,14 +32,14 @@
                                 <ColumnDefinition Width="296*"/>
                             </Grid.ColumnDefinitions>
                             <Button
-                                Command="{Binding WorkersViewModel.FindByConditionCommand}"
+                                Command="{Binding WorkersViewModel.DataViewModel.Select}"
                                 Name="SearchWorker"
                                 Content="Искать" 
                                 HorizontalAlignment="Left"
                                 Margin="10,10,0,0"
                                 VerticalAlignment="Top" Height="24">
                                 <Button.CommandParameter>
-                                    <MultiBinding Converter="{StaticResource SearchConverter }">
+                                    <MultiBinding Converter="{StaticResource SearchConverter}">
                                         <Binding Path="SelectedValue" ElementName="WorkersProperties"/>
                                         <Binding Path="Text" ElementName="WorkersSearchText"/>
                                     </MultiBinding>
@@ -54,7 +54,7 @@
                                      Height="22"/>
                             <ComboBox
                                 Name="WorkersProperties"
-                                ItemsSource="{Binding WorkersViewModel.PropertiesNames}"
+                                ItemsSource="{Binding WorkersViewModel.DataViewModel.PropertiesNames}"
                                 HorizontalAlignment="Left"
                                 Margin="75,12,0,0" 
                                 VerticalAlignment="Top" 
@@ -69,7 +69,7 @@
                                 <ColumnDefinition Width="432*"/>
                             </Grid.ColumnDefinitions>
                             <DataGrid
-                                ItemsSource="{Binding WorkersViewModel.DataToSelect}"
+                                ItemsSource="{Binding WorkersViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True" 
                                 Name="Workers"
                                 Margin="10,59,237,102"
@@ -118,7 +118,7 @@
                     <Grid x:Name="MainBuildingObjects" Background="#FFE5E5E5">
                         <Grid x:Name="SearchPanelBuildingObjects">
                             <Button
-                            Command="{Binding BuildingObjectViewModel.FindByConditionCommand}"
+                            Command="{Binding BuildingObjectViewModel.DataViewModel.Select}"
                             Name="SearhBuildingObjects"
                             Content="Искать" 
                             HorizontalAlignment="Left" 
@@ -141,7 +141,7 @@
                             Height="20"/>
                             <ComboBox 
                             Name="BuildingObjectsProperties"
-                            ItemsSource="{Binding BuildingObjectViewModel.PropertiesNames}"
+                            ItemsSource="{Binding BuildingObjectViewModel.DataViewModel.PropertiesNames}"
                             HorizontalAlignment="Left"
                             Margin="227,10,0,0"
                             VerticalAlignment="Top"
@@ -149,7 +149,7 @@
                         </Grid>
                         <Grid x:Name="BuildingObjectsPanel" Margin="0,44,282,0">
                             <DataGrid 
-                                ItemsSource="{Binding BuildingObjectViewModel.DataToSelect}"
+                                ItemsSource="{Binding BuildingObjectViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True" 
                                 x:Name="BuildingObjects"
                                 Margin="10,10,-45,101">
@@ -239,7 +239,7 @@
                                 VerticalAlignment="Top" 
                                 Height="24" 
                                 Grid.ColumnSpan="2"
-                                Command="{Binding ProvidersViewModel.SelectProviders}">
+                                Command="{Binding ProvidersViewModel.DataViewModel.Select}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource SearchConverter}">
                                         <Binding Path="SelectedValue" ElementName="SearchProviderParams"/>
@@ -256,7 +256,7 @@
                                 Width="120" 
                                 Height="22" Grid.Column="1"/>
                             <ComboBox
-                                ItemsSource="{Binding ProvidersViewModel.PropertiesNames}"
+                                ItemsSource="{Binding ProvidersViewModel.DataViewModel.PropertiesNames}"
                                 Name="SearchProviderParams"
                                 HorizontalAlignment="Left"
                                 Margin="245,12,0,0" 
@@ -265,7 +265,7 @@
                         </Grid>
                         <Grid Name="ProvidersPanel">
                             <DataGrid
-                                ItemsSource="{Binding ProvidersViewModel.DataToSelect}"
+                                ItemsSource="{Binding ProvidersViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Providers"
                                 Margin="10,59,237,102">
@@ -335,7 +335,7 @@
                     <Grid x:Name="MainPlans" Background="#FFE5E5E5" Height="409">
                         <Grid x:Name="PlansSearchPanel">
                             <Button
-                            Command="{Binding PlansViewModel.FindPlansByCondition}"
+                            Command="{Binding PlansViewModel.DataViewModel.Select}"
                             Name="SearhPlan"
                             Content="Искать" 
                             HorizontalAlignment="Left" 
@@ -358,7 +358,7 @@
                             Height="20"/>
                             <ComboBox
                             Name="PropertiesNamesPlans"
-                            ItemsSource="{Binding PlansViewModel.PropertiesNames}"
+                            ItemsSource="{Binding PlansViewModel.DataViewModel.PropertiesNames}"
                             HorizontalAlignment="Left"
                             Margin="227,10,0,0"
                             VerticalAlignment="Top"
@@ -371,7 +371,7 @@
                                 <ColumnDefinition Width="577*"/>
                             </Grid.ColumnDefinitions>
                             <DataGrid
-                                ItemsSource="{Binding PlansViewModel.DataToSelect}"
+                                ItemsSource="{Binding PlansViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Plans"
                                 Margin="10,59,237,102"

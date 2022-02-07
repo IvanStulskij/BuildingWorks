@@ -1,8 +1,6 @@
 ﻿using BuildingWorks.Models.Databasable.Contexts;
 using BuildingWorks.Models.Databasable.Tables.BuildingObjects;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using BuildingWorks.ViewModels.BuildingObjects;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -12,21 +10,20 @@ using BuildingWorks.Models.BusinessLogic.BuildingObjects;
 
 namespace BuildingWorks.ViewModels
 {
-    public class BuildingObjectViewModel : INotifyPropertyChanged
+    public class BuildingObjectViewModel : ViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         public AddressViewModel AddressViewModel { get; set; } = new AddressViewModel();
+        public DataViewModel<BuildingObject> DataViewModel { get; set; }
+
+        private readonly BuildingObjectContext _objectContext = new BuildingObjectContext();
+
         private BuildingObjectBase _buildingObjectBase;
-        private List<BuildingObject> _dataToSelect;
+
 
         public BuildingObjectViewModel()
         {
-            _buildingObjectBase = new BuildingObjectBase(new BuildingObjectContext());
-        }
-
-        public void OnPropertyChanged([CallerMemberName] string callerName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(callerName));
+            _buildingObjectBase = new BuildingObjectBase(_objectContext);
+            DataViewModel = new DataViewModel<BuildingObject>(_objectContext.BuildingObject);
         }
 
         public List<string> BuildingObjectsTypes
@@ -41,40 +38,15 @@ namespace BuildingWorks.ViewModels
             }
         }
 
-        public List<BuildingObject> DataToSelect
+        public RelayCommand<Tuple<string, object, object, object, string, string>> AddCommand
         {
             get
             {
-                return _dataToSelect;
-            }
-            set
-            {
-                _dataToSelect = value;
-                OnPropertyChanged(nameof(DataToSelect));
-            }
-        }
-
-        public List<string> PropertiesNames
-        {
-            get
-            {
-                return _buildingObjectBase.SelectPropertiesNames().ToList();
-            }
-            set
-            {
-                OnPropertyChanged(nameof(PropertiesNames));
-            }
-        }
-
-        public RelayCommand<(string, object, object, object, string, string)> AddCommand
-        {
-            get
-            {
-                return new RelayCommand<(string name, object region, object town, object street, string customer, string type)>
+                return new RelayCommand<Tuple<string, object, object, object, string, string>>
                     (
                         buildingObject =>
                         {
-                            _buildingObjectBase.Create(buildingObject);
+                            _buildingObjectBase.Create(buildingObject.ToValueTuple());
                         }
                     );
             }
@@ -103,20 +75,6 @@ namespace BuildingWorks.ViewModels
                         newData =>
                         {
                             _buildingObjectBase.Update(newData.Item1, newData.Item2);
-                        }
-                    );
-            }
-        }
-
-        public RelayCommand<Tuple<string, string>> FindByConditionCommand
-        {
-            get
-            {
-                return new RelayCommand<Tuple<string, string>>
-                    (
-                        condition =>
-                        {
-                            DataToSelect = _buildingObjectBase.SelectByCondition(condition).ToList();
                         }
                     );
             }

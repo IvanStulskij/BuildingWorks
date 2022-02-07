@@ -8,6 +8,7 @@ namespace BuildingWorks.Models.Databasable.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
             optionsBuilder.UseMySQL(ConnectionConstants.ConnectionString);
         }
     }
