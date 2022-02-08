@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Windows;
 using BuildingWorks.Models.Bases;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +17,20 @@ namespace BuildingWorks.ViewModels
             _dataToSelect = new ObservableCollection<T>(_data);
             _selectionBase = new SelectionBase<T>(_data);
             _propertiesNames = new ObservableCollection<string>(_selectionBase.GetPropertiesNames());
+        }
+
+        private T _selectedValue;
+        public T SelectedValue
+        {
+            get
+            {
+                return _selectedValue;
+            }
+            set
+            {
+                _selectedValue = value;
+                OnPropertyChanged(nameof(SelectedValue));
+            }
         }
 
         private ObservableCollection<T> _dataToSelect;

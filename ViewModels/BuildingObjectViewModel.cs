@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using BuildingWorks.Models.Bases;
 using BuildingWorks.Models.BusinessLogic.BuildingObjects;
+using BuildingWorks.ViewModels.Operations;
 
 namespace BuildingWorks.ViewModels
 {
@@ -14,16 +15,16 @@ namespace BuildingWorks.ViewModels
     {
         public AddressViewModel AddressViewModel { get; set; } = new AddressViewModel();
         public DataViewModel<BuildingObject> DataViewModel { get; set; }
+        public RemoveViewModel<BuildingObject> RemoveViewModel { get; set; }
 
-        private readonly BuildingObjectContext _objectContext = new BuildingObjectContext();
-
-        private BuildingObjectBase _buildingObjectBase;
-
+        private readonly BuildingObjectContext _context = new BuildingObjectContext();
+        private BuildingObjectBase _baseTable;
 
         public BuildingObjectViewModel()
         {
-            _buildingObjectBase = new BuildingObjectBase(_objectContext);
-            DataViewModel = new DataViewModel<BuildingObject>(_objectContext.BuildingObject);
+            _baseTable = new BuildingObjectBase(_context);
+            DataViewModel = new DataViewModel<BuildingObject>(_context.BuildingObject);
+            RemoveViewModel = new RemoveViewModel<BuildingObject>(DataViewModel, _context.BuildingObject, _baseTable);
         }
 
         public List<string> BuildingObjectsTypes
@@ -46,35 +47,21 @@ namespace BuildingWorks.ViewModels
                     (
                         buildingObject =>
                         {
-                            _buildingObjectBase.Create(buildingObject.ToValueTuple());
+                            _baseTable.Create(buildingObject.ToValueTuple());
                         }
                     );
             }
         }
 
-        public RelayCommand<int> RemoveCommand
+        public RelayCommand<Tuple<BuildingObject, string, object, object, object, string, string>> UpdateCommand
         {
             get
             {
-                return new RelayCommand<int>
-                    (
-                        codeToRemove =>
-                        {
-                            _buildingObjectBase.Delete(codeToRemove);
-                        }
-                    );
-            }
-        }
-
-        public RelayCommand<Tuple<int, Tuple<string, object, object, object, string, string>>> UpdateCommand
-        {
-            get
-            {
-                return new RelayCommand<Tuple<int, Tuple<string, object, object, object, string, string>>>
+                return new RelayCommand<Tuple<BuildingObject, string, object, object, object, string, string>>
                     (
                         newData =>
                         {
-                            _buildingObjectBase.Update(newData.Item1, newData.Item2);
+                            _baseTable.Update(newData.ToValueTuple());
                         }
                     );
             }

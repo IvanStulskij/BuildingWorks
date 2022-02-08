@@ -56,22 +56,5 @@ namespace BuildingWorks.Models.Bases
 
             _providersContext.SaveChanges();
         }
-
-        public IEnumerable<Provider> SelectByCondition(Tuple<string, string> condition)
-        {
-            var conditionalSelectQuery = new TemplateConditionalSelectQuery
-            (
-                TableNames.ProvidersBase,
-                condition.Item1,
-                condition.Item2
-            );
-            return _providersContext.Providers.FromSqlRaw(conditionalSelectQuery.Query);
-        }
-
-        public IEnumerable<string> SelectPropertiesNames()
-        {
-            return _providersContext.Providers.EntityType.GetProperties()
-                .Select(property => property.Name);
-        }
     }
 }

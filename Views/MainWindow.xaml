@@ -70,11 +70,11 @@
                             </Grid.ColumnDefinitions>
                             <DataGrid
                                 ItemsSource="{Binding WorkersViewModel.DataViewModel.DataToSelect}"
+                                SelectedValue="{Binding WorkersViewModel.DataViewModel.SelectedValue}"
                                 IsReadOnly="True" 
                                 Name="Workers"
                                 Margin="10,59,237,102"
                                 Grid.ColumnSpan="5">
-
                             </DataGrid>
                         </Grid>
                         <Grid Name="AddingPanel" Grid.ColumnSpan="3">
@@ -94,6 +94,7 @@
                                 VerticalAlignment="Top" Width="61" Grid.Column="1"/>
                             <Button
                                 Content="Удалить"
+                                Command="{Binding WorkersViewModel.RemoveViewModel.RemoveCommand}"
                                 HorizontalAlignment="Left"
                                 Margin="439,109,0,0"
                                 VerticalAlignment="Top" Width="61" Grid.Column="1"/>
@@ -149,11 +150,11 @@
                         </Grid>
                         <Grid x:Name="BuildingObjectsPanel" Margin="0,44,282,0">
                             <DataGrid 
+                                SelectedValue="{Binding BuildingObjectViewModel.DataViewModel.SelectedValue}"
                                 ItemsSource="{Binding BuildingObjectViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True" 
                                 x:Name="BuildingObjects"
                                 Margin="10,10,-45,101">
-
                             </DataGrid>
                         </Grid>
                         <Grid x:Name="BuildObjectAddPanel">
@@ -167,7 +168,8 @@
                                 HorizontalAlignment="Left" 
                                 Margin="627,89,0,0" 
                                 VerticalAlignment="Top"/>
-                            <Button 
+                            <Button
+                                Command="{Binding BuildingObjectViewModel.RemoveViewModel.RemoveCommand}"
                                 Content="Удалить"
                                 HorizontalAlignment="Left" 
                                 Margin="577,124,0,0" 
@@ -265,6 +267,7 @@
                         </Grid>
                         <Grid Name="ProvidersPanel">
                             <DataGrid
+                                SelectedValue="{Binding ProvidersViewModel.DataViewModel.SelectedValue}"
                                 ItemsSource="{Binding ProvidersViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Providers"
@@ -286,15 +289,12 @@
                                 HorizontalAlignment="Left" 
                                 Margin="590,89,0,0" 
                                 VerticalAlignment="Top" Grid.Column="1" Width="130"/>
-                            <Button 
-                                Command="{Binding BuildingObjectViewModel.RemoveCommand}"
+                            <Button
                                 Content="Удалить"
+                                Command="{Binding ProvidersViewModel.RemoveViewModel.RemoveCommand}"
                                 HorizontalAlignment="Left" 
                                 Margin="590,124,0,0" 
                                 VerticalAlignment="Top" Grid.Column="1" Width="130">
-                                <Button.CommandParameter>
-                                    5
-                                </Button.CommandParameter>
                             </Button>
                             <Button
                                 Command="{Binding ProvidersViewModel.ProviderStatesViewModel.SelectContractsCommad}"
@@ -371,6 +371,7 @@
                                 <ColumnDefinition Width="577*"/>
                             </Grid.ColumnDefinitions>
                             <DataGrid
+                                SelectedValue="{Binding PlansViewModel.DataViewModel.SelectedValue}"
                                 ItemsSource="{Binding PlansViewModel.DataViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Plans"
@@ -406,6 +407,14 @@
                                 HorizontalAlignment="Left" 
                                 Margin="415,154,0,0" 
                                 VerticalAlignment="Top" Grid.Column="1" Width="86"/>
+                            <Button
+                                Content="Удалить"
+                                Command="{Binding PlansViewModel.RemoveViewModel.RemoveCommand}"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                Margin="415,190,0,0"
+                                VerticalAlignment="Top" 
+                                Width="86"/>
                         </Grid>
                         <Grid Name="BenefitPanel">
                             <Grid.ColumnDefinitions>

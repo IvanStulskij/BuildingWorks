@@ -7,6 +7,7 @@ using BuildingWorks.Models.Databasable.Contexts;
 using BuildingWorks.Models.Databasable.Tables.Workers;
 using BuildingWorks.ViewModels.Workers;
 using BuildingWorks.Models.BusinessLogic.Workers.Types;
+using BuildingWorks.ViewModels.Operations;
 
 namespace BuildingWorks.ViewModels
 {
@@ -14,6 +15,7 @@ namespace BuildingWorks.ViewModels
     {
         public SalariesViewModel SalariesViewModel { get; private set; } = new SalariesViewModel();
         public DataViewModel<Worker> DataViewModel { get; private set; }
+        public RemoveViewModel<Worker> RemoveViewModel { get; set; }
         private readonly WorkersContext _workersContext = new WorkersContext();
         private readonly WorkersBase _workersBase;
 
@@ -21,7 +23,7 @@ namespace BuildingWorks.ViewModels
         {
             _workersBase = new WorkersBase(_workersContext);
             DataViewModel = new DataViewModel<Worker>(_workersContext.Workers);
-            
+            RemoveViewModel = new RemoveViewModel<Worker>(DataViewModel, _workersContext.Workers, _workersBase);
         }
 
         public List<string> WorkersTypes
