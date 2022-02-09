@@ -1,20 +1,16 @@
-﻿using BuildingWorks.Models.Bases.Providers;
-using BuildingWorks.Models.Databasable.Tables.Provides;
-using Microsoft.EntityFrameworkCore;
+﻿using BuildingWorks.Models.Databasable.Tables.Provides;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace BuildingWorks.Models.BusinessLogic.Providers.ProvidersStates
 {
     public class MaterialsState : StateOfProvidersNamespace
     {
-        private readonly int _contractCode;
+        private readonly Contract _contract;
 
-        public MaterialsState(int contractCode)
+        public MaterialsState(Contract contract)
         {
-            _contractCode = contractCode;
+            _contract = contract;
         }
 
         public override IEnumerable GetSourceData()
@@ -24,10 +20,9 @@ namespace BuildingWorks.Models.BusinessLogic.Providers.ProvidersStates
             /*MaterialsBase materialsBase = new MaterialsBase(new Databasable.Contexts.ProviderContext());
             
             materialsBase.FindByCondition(material => material.PricePerOne > 5);*/
-            return ProviderContext.Contracts
-                .Where(contract => contract.ContractCode == _contractCode)
-                .FirstOrDefault()
-                .Materials;
+            return ProviderContext.ContractsByMaterials
+                .Where(contract => contract.Contract == _contract)
+                .Select(contract => contract.Material);
         }
     }
 }

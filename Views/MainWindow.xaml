@@ -268,7 +268,7 @@
                         <Grid Name="ProvidersPanel">
                             <DataGrid
                                 SelectedValue="{Binding ProvidersViewModel.DataViewModel.SelectedValue}"
-                                ItemsSource="{Binding ProvidersViewModel.DataViewModel.DataToSelect}"
+                                ItemsSource="{Binding ProvidersViewModel.ProviderStatesViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Providers"
                                 Margin="10,59,237,102">
@@ -305,7 +305,7 @@
                                 VerticalAlignment="Top" 
                                 Width="130">
                                 <Button.CommandParameter>
-                                    1
+                                    <Binding Path="SelectedValue" ElementName="Providers"></Binding>
                                 </Button.CommandParameter>
                             </Button>
                             <Button 
@@ -325,7 +325,7 @@
                                 VerticalAlignment="Center"
                                 Width="130">
                                 <Button.CommandParameter>
-                                    2
+                                    <Binding Path="SelectedValue" ElementName="Providers"></Binding>
                                 </Button.CommandParameter>
                             </Button>
                         </Grid>

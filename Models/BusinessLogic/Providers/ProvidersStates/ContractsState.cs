@@ -1,21 +1,22 @@
-﻿using System.Collections;
+﻿using BuildingWorks.Models.Databasable.Tables.Provides;
+using System.Collections;
 using System.Linq;
 
 namespace BuildingWorks.Models.BusinessLogic.Providers.ProvidersStates
 {
     public class ContractsState : StateOfProvidersNamespace
     {
-        private readonly int _providerCode;
+        private readonly Provider _provider;
 
-        public ContractsState(int providerCode)
+        public ContractsState(Provider provider)
         {
-            _providerCode = providerCode;
+            _provider = provider;
         }
 
         public override IEnumerable GetSourceData()
         {
             return ProviderContext.Contracts
-                .Where(contract => contract.Provider.ProviderCode == _providerCode);
+                .Where(contract => contract.Provider == _provider);
         }
     }
 }

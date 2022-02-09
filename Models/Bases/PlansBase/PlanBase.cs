@@ -33,19 +33,6 @@ namespace BuildingWorks.Models.Bases.PlansBase
             _plansContext.SaveChanges();
         }
 
-        public void Delete(int codeToRemove)
-        {
-            _plansContext.Plans
-                .Remove
-                (
-                    _plansContext.Plans
-                    .Where(provider => provider.PlanCode == codeToRemove)
-                    .FirstOrDefault()
-                );
-
-            _plansContext.SaveChanges();
-        }
-
         public void Update(int codeToUpdate, Tuple<BuildingObject, DateTime, bool, decimal, string> newData)
         {
             Plan planToUpdate = _plansContext.Plans

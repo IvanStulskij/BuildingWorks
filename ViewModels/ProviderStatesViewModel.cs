@@ -1,8 +1,9 @@
 ﻿using BuildingWorks.Models.BusinessLogic.Providers.ProvidersStates;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections;
-using System.Windows;
+using System.Linq;
+using System.Collections.ObjectModel;
+using BuildingWorks.Models.Databasable.Tables.Provides;
 
 namespace BuildingWorks.ViewModels
 {
@@ -10,22 +11,23 @@ namespace BuildingWorks.ViewModels
     {
         private StateOfProvidersNamespace _state;
 
-        public IEnumerable DataToSelect
+        private  ObservableCollection<object> _dataToSelect;
+        public ObservableCollection<object> DataToSelect
         {
             get
             {
-                if (_state != null)
+                if (_state != null && _state.GetSourceData() != null)
                 {
-                    return _state.GetSourceData();
+                    return _dataToSelect;
                 }
                 else
                 {
-                    return new ProvidersState().GetSourceData();
+                    return new ObservableCollection<object>(new ProvidersState().GetSourceData().Cast<Provider>());
                 }
             }
             set
             {
-                //_dataToSelect = value;
+                _dataToSelect = value;
                 OnPropertyChanged(nameof(DataToSelect));
                 //MessageBox.Show(DataToSelect.GetType().ToString());
             }
@@ -40,37 +42,49 @@ namespace BuildingWorks.ViewModels
                     () =>
                     {
                         _state = new ProvidersState();
-                        MessageBox.Show(_state.GetType().ToString());
+                        IEnumerable sourceData = _state.GetSourceData();
+                        if (sourceData != null)
+                        {
+                            DataToSelect = new ObservableCollection<object>(sourceData.Cast<Provider>());
+                        }
                     }
                 );
             }
         }
 
-        public RelayCommand<string> SelectContractsCommad
+        public RelayCommand<Provider> SelectContractsCommad
         {
             get
             {
-                return new RelayCommand<string>
+                return new RelayCommand<Provider>
                 (
-                    providerCode =>
+                    provider =>
                     {
-                        _state = new ContractsState(Convert.ToInt32(providerCode));
-                        MessageBox.Show(_state.GetType().ToString());
+                        _state = new ContractsState(provider);
+                        IEnumerable sourceData = _state.GetSourceData();
+                        if (sourceData != null)
+                        {
+                            DataToSelect = new ObservableCollection<object>(sourceData.Cast<Contract>());
+                        }
                     }
                 );
             }
         }
 
-        public RelayCommand<string> SelectMaterialsCommad
+        public RelayCommand<Contract> SelectMaterialsCommad
         {
             get
             {
-                return new RelayCommand<string>
+                return new RelayCommand<Contract>
                 (
                     contractCode =>
                     {
-                        _state = new ContractsState(Convert.ToInt32(contractCode));
-                        MessageBox.Show(_state.GetType().ToString());
+                        _state = new MaterialsState(contractCode);
+                        IEnumerable sourceData = _state.GetSourceData();
+                        if (sourceData != null)
+                        {
+                            DataToSelect = new ObservableCollection<object>(sourceData.Cast<Material>());
+                        }
                     }
                 );
             }

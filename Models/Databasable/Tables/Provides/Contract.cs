@@ -8,7 +8,6 @@ namespace BuildingWorks.Models.Databasable.Tables.Provides
         [Key]
         public int ContractCode { get; set; }
         public string Conditions { get; set; }
-        public int ProviderCode { get; set; }
         public Provider Provider { get; set; }
         public List<Material> Materials { get; set; }
     }

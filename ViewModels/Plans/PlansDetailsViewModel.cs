@@ -1,5 +1,6 @@
 ﻿using BuildingWorks.Models.Bases.PlansBase;
 using BuildingWorks.Models.Databasable.Contexts;
+using BuildingWorks.Models.Databasable.Tables.Plans;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Windows;
@@ -31,15 +32,15 @@ namespace BuildingWorks.ViewModels.Plans
             }
         }
 
-        public RelayCommand<string> CountDonePercentCommand
+        public RelayCommand<Plan> CountDonePercentCommand
         {
             get
             {
-                return new RelayCommand<string>
+                return new RelayCommand<Plan>
                     (
-                        done =>
+                        plan =>
                         {
-                            DonePercent = _planDetatilBase.CountDonePercent(Convert.ToInt32(done));
+                            DonePercent = _planDetatilBase.CountDonePercent(plan);
                         }
                     );
             }
