@@ -372,7 +372,7 @@
                             </Grid.ColumnDefinitions>
                             <DataGrid
                                 SelectedValue="{Binding PlansViewModel.DataViewModel.SelectedValue}"
-                                ItemsSource="{Binding PlansViewModel.DataViewModel.DataToSelect}"
+                                ItemsSource="{Binding PlansViewModel.PlansDataViewModel.DataToSelect}"
                                 IsReadOnly="True"
                                 Name="Plans"
                                 Margin="10,59,237,102"
@@ -397,11 +397,16 @@
                                 <ColumnDefinition Width="106*"/>
                                 <ColumnDefinition Width="291*"/>
                             </Grid.ColumnDefinitions>
-                            <Button 
+                            <Button
+                                Command="{Binding PlansViewModel.PlansDataViewModel.SelectDetailsCommand}"
                                 Content="Детали плана"
                                 HorizontalAlignment="Left"
                                 Margin="415,119,0,0"
-                                VerticalAlignment="Top" Grid.Column="1" Width="86"/>
+                                VerticalAlignment="Top" Grid.Column="1" Width="86">
+                                <Button.CommandParameter>
+                                    <Binding Path="SelectedValue" ElementName="Plans"></Binding>
+                                </Button.CommandParameter>
+                            </Button>
                             <Button 
                                 Content="Изображение" 
                                 HorizontalAlignment="Left" 
@@ -415,6 +420,12 @@
                                 Margin="415,190,0,0"
                                 VerticalAlignment="Top" 
                                 Width="86"/>
+                            <Button
+                                Command="{Binding PlansViewModel.PlansDataViewModel.SelectAllPlansCommand}"
+                                Content="Планы"
+                                HorizontalAlignment="Left"
+                                Margin="415,24,0,0"
+                                VerticalAlignment="Top" Width="86" Grid.Column="1"/>
                         </Grid>
                         <Grid Name="BenefitPanel">
                             <Grid.ColumnDefinitions>

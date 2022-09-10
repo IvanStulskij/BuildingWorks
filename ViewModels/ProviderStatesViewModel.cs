@@ -29,7 +29,6 @@ namespace BuildingWorks.ViewModels
             {
                 _dataToSelect = value;
                 OnPropertyChanged(nameof(DataToSelect));
-                //MessageBox.Show(DataToSelect.GetType().ToString());
             }
         }
 

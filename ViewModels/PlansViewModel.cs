@@ -8,6 +8,7 @@ namespace BuildingWorks.ViewModels
 {
     public class PlansViewModel : ViewModel
     {
+        public PlansDataViewModel PlansDataViewModel { get; private set; } = new PlansDataViewModel();
         public PlansDetailsViewModel PlansDetailsViewModel { get; } = new PlansDetailsViewModel();
         public DataViewModel<Plan> DataViewModel { get; set; }
         public RemoveViewModel<Plan> RemoveViewModel { get; set; }

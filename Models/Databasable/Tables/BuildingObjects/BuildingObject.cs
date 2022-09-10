@@ -9,7 +9,9 @@ namespace BuildingWorks.Models.Databasable.Tables.BuildingObjects
     {
         [Key]
         public int ObjectId { get; private set; }
+        [Display(Name = "Наименование")]
         public string ObjectName { get; set; }
+        [Display(Name = "Тип")]
         public string ObjectType { get; set; }
         public string ObjectCustomer { get; set; }
         public Region Region { get; set; }

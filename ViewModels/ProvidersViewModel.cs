@@ -10,7 +10,6 @@ namespace BuildingWorks.ViewModels
 {
     public class ProvidersViewModel : ViewModel
     {
-
         public MaterialsCostViewModel MaterialsCostViewModel { get; private set; } = new MaterialsCostViewModel();
         public ProviderStatesViewModel ProviderStatesViewModel { get; private set; } = new ProviderStatesViewModel();
         public DataViewModel<Provider> DataViewModel { get; private set; }
