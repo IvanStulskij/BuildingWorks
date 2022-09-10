@@ -17,9 +17,9 @@ namespace BuildingWorks.Models.Bases.PlansBase
             _plansContext = context;
         }
 
-        public float CountDonePercent(Plan plan)
+        public float CountDonePercent(int planId)
         {
-            IEnumerable<PlanDetail> plansDetails = FindDetailsByPlan(plan);
+            IEnumerable<PlanDetail> plansDetails = FindDetailsByPlan(planId);
             IEnumerable<PlanDetail> donePlanDetails = FindDoneDetailByPlan(plansDetails);
 
             float totalCount = Convert.ToSingle(plansDetails.Count());
@@ -35,10 +35,10 @@ namespace BuildingWorks.Models.Bases.PlansBase
             return planDetails.Where(planDetail => planDetail.IsCompleted);
         }
 
-        public IEnumerable<PlanDetail> FindDetailsByPlan(Plan plan)
+        private IEnumerable<PlanDetail> FindDetailsByPlan(int planId)
         {
             return _plansContext.PlansDetails
-                .Where(planDetail => planDetail.Plan == plan);
+                .Where(planDetail => planDetail.PlanId == planId);
         }
     }
 }

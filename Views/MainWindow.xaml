@@ -428,7 +428,7 @@
                                 Margin="258,324,0,0"
                                 VerticalAlignment="Top" Grid.ColumnSpan="2" Width="179">
                                 <Button.CommandParameter>
-                                    1
+                                    <Binding Path="SelectedValue" ElementName="Plans"></Binding>
                                 </Button.CommandParameter>
                             </Button>
                             <TextBlock 

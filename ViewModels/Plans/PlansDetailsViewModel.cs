@@ -40,7 +40,7 @@ namespace BuildingWorks.ViewModels.Plans
                     (
                         plan =>
                         {
-                            DonePercent = _planDetatilBase.CountDonePercent(plan);
+                            DonePercent = _planDetatilBase.CountDonePercent(plan.PlanCode);
                         }
                     );
             }
