@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingWorks", "BuildingWorks.csproj", "{1463B044-D678-49C2-B5AC-A7F6447DB801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingWorks", "BuildingWorks.csproj", "{1463B044-D678-49C2-B5AC-A7F6447DB801}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingClasses", "..\UsingClasses\UsingClasses.csproj", "{B7AA3691-A206-44F2-B5B6-47A99DDFC5C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingWorksBackend", "BuildingWorksBackend\BuildingWorksBackend.csproj", "{65816846-DCB0-4E36-BE26-705A64B8FD2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,26 @@ Global
 		{B7AA3691-A206-44F2-B5B6-47A99DDFC5C0}.Release|x64.Build.0 = Release|x64
 		{B7AA3691-A206-44F2-B5B6-47A99DDFC5C0}.Release|x86.ActiveCfg = Release|x86
 		{B7AA3691-A206-44F2-B5B6-47A99DDFC5C0}.Release|x86.Build.0 = Release|x86
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|x64.Build.0 = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Debug|x86.Build.0 = Debug|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|ARM.Build.0 = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|ARM64.Build.0 = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|x64.ActiveCfg = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|x64.Build.0 = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|x86.ActiveCfg = Release|Any CPU
+		{65816846-DCB0-4E36-BE26-705A64B8FD2E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
