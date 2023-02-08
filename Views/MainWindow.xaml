@@ -166,8 +166,8 @@
                             <Button 
                                 Content="Обновить"
                                 HorizontalAlignment="Left" 
-                                Margin="627,89,0,0" 
-                                VerticalAlignment="Top"/>
+                                Margin="577,89,0,0" 
+                                VerticalAlignment="Top" Width="130"/>
                             <Button
                                 Command="{Binding BuildingObjectViewModel.RemoveViewModel.RemoveCommand}"
                                 Content="Удалить"

@@ -21,6 +21,7 @@ namespace BuildingWorks.ViewModels.BuildingObjects
 
         private string _selectedRegion;
         private string _selectedTown;
+
         public AddressViewModel()
         {
             _regionBase = new RegionBase(_buildingObjectContext);
