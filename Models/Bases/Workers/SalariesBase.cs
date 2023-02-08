@@ -1,4 +1,5 @@
-﻿using BuildingWorks.Models.Databasable.Contexts;
+﻿using BuildingWorks.Models.BusinessLogic.Workers;
+using BuildingWorks.Models.Databasable.Contexts;
 using BuildingWorks.Models.Databasable.Tables.Workers;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
